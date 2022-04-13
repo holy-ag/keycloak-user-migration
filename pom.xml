@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <java.version>11</java.version>
-        <keycloak.version>16.1.0</keycloak.version>
-        <resteasy.version>3.13.2.Final</resteasy.version>
+        <keycloak.version>17.0.1</keycloak.version>
+        <resteasy.version>4.7.5.Final</resteasy.version>
         <mockito.version>3.9.0</mockito.version>
 
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -103,13 +103,56 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>
-        </plugins>
-    </build>
+		<finalName>ocm-keycloak</finalName>
+		<plugins>
+			<plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-shade-plugin</artifactId>
+						<version>3.2.4</version>
+				  <executions>
+					 <!-- Run shade goal on package phase -->
+					<execution>
+					<phase>package</phase>
+					<goals>
+						<goal>shade</goal>
+					</goals>
+					<configuration>
+					  <artifactSet>
+						<includes>
+							<include>org.jboss.resteasy:resteasy-client*</include>
+							<include>org.glassfish.jersey.core:jersey-client*</include>
+						</includes>
+					</artifactSet>
+					</configuration>
+					  </execution>
+				  </executions>
+				</plugin>
+				<plugin>
+                            <artifactId>maven-resources-plugin</artifactId>
+                            <version>3.1.0</version>
+                            <executions>
+                                <execution>
+                                    <id>copy-resource-one</id>
+                                    <phase>install</phase>
+                                    <goals>
+                                        <goal>copy-resources</goal>
+                                    </goals>
+                                    <configuration>
+                                        <outputDirectory>/home/dindimon/dev/ocm-sso-poc/backend/keycloak/providers/</outputDirectory>
+                                        <resources>
+                                            <resource>
+                                                <directory>target</directory>
+                                                <includes>
+                                                    <include>ocm-keycloak.jar</include>
+                                                </includes>
+                                            </resource>
+                                        </resources>
+                                    </configuration>
+                                </execution>
+                           </executions>
+                        </plugin>
+		</plugins>
+    	</build>
 
     <profiles>
         <profile>

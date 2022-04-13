@@ -10,17 +10,5 @@ services:
       KEYCLOAK_PASSWORD: admin
     ports:
       - "8024:8080"
-    networks:
-      - internal
-
-  legacy-system-example:
-    build:
-      context: legacy-system-example
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    networks:
-      - internal
-
-networks:
-  internal:
+    extra_hosts:
+      - "localhost:192.168.178.24"
