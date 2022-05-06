@@ -10,6 +10,7 @@ import org.keycloak.component.ComponentModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.provider.ProviderConfigProperty;
 import org.keycloak.storage.UserStorageProviderFactory;
+import org.keycloak.events.EventListenerProviderFactory;
 
 import java.util.List;
 
