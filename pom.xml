@@ -112,7 +112,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>
@@ -153,7 +152,7 @@
                                         <goal>copy-resources</goal>
                                     </goals>
                                     <configuration>
-                                        <outputDirectory>/opt/workspace/ocm-sso-poc/backend/keycloak/providers/</outputDirectory>
+                                        <outputDirectory>/home/dindimon/dev/ocm-sso-poc/backend/keycloak/providers/</outputDirectory>
                                         <resources>
                                             <resource>
                                                 <directory>target</directory>
